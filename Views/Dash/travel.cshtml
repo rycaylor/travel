@@ -10,5 +10,25 @@
 }
 <body>
     <h1>Hi @user.UserName!</h1>
+
+    <table>
+        <th>Name of TripMaker</th>
+        <th>Destination</th>
+        <th>Description</th>
+        <th>Action</th>
+        @{
+            foreach (var trip in ViewBag.trips){
+                <tr>
+                    <td>@trip.User.FirstName</td>
+                    <td>@trip.Title</td>
+                    <td>@trip.Description</td>
+                    <td>Join</td>
+                </tr>
+            }
+        }
+    </table>
+
+    <a href="/createtrip">Make a trip!</a>
 </body>
+
 </html>

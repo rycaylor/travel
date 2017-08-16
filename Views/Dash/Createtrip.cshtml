@@ -1,0 +1,62 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CreateTrip</title>
+</head>
+<body>
+
+<h1>Please Create a Trip</h1>
+
+@{
+    if(@ViewBag.error != null)
+    {
+        <span>@ViewBag.error</span>
+    }
+}
+@model travel.Models.TripVal
+    <form asp-controller="Dash" asp-action="AddTrip" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label for="Title">Title: </label>
+                    <input asp-for="Title"/>
+                </td>
+                <td>
+                    <span asp-validation-for="Title"></span>
+                 </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="Description">Description: </label>
+                    <textarea cols="80" rows="8" asp-for="Description"></textarea>
+                </td>
+                <td>
+                    <span asp-validation-for="Description"></span>
+                 </td>
+            </tr>
+             <tr>
+                <td>
+                    <label for="LeaveDate">Leaving On: </label>
+                    <input type="Date" asp-for="LeaveDate"/>
+                </td>
+                <td>
+                    <span asp-validation-for="LeaveDate"></span>
+                 </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label for="ReturnDate">Return On: </label>
+                    <input type="Date" asp-for="ReturnDate"/>
+                </td>
+                <td>
+                    <span asp-validation-for="ReturnDate"></span>
+                 </td>
+            </tr>
+        </table>
+        <button type="submit">Create new Trip!</button>
+    </form>
+
+</body>
+</html>

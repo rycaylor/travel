@@ -27,6 +27,7 @@ namespace travel
             // Add framework services.
             services.Configure<MySqlOptions>(Configuration.GetSection("DBInfo"));
             services.AddScoped<UserFactory>();
+            services.AddScoped<TripFactory>();
             services.AddMvc();
             services.AddSession();
         }
