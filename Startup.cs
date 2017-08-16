@@ -1,6 +1,8 @@
 using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +12,7 @@ namespace travel
 {
     public class Startup
     {
+
         public IConfiguration Configuration { get; private set; }
         public Startup(IHostingEnvironment env){
             var builder = new ConfigurationBuilder()

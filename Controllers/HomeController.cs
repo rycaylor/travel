@@ -12,7 +12,8 @@ namespace travel.Controllers
     {
         private readonly UserFactory userFactory;
 
-        public HomeController(UserFactory connection){
+        public HomeController(UserFactory connection)
+        {
             userFactory = connection;
         }
 
