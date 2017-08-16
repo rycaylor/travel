@@ -17,7 +17,7 @@ namespace travel
         public Startup(IHostingEnvironment env){
             var builder = new ConfigurationBuilder()
             .SetBasePath(env.ContentRootPath)
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile("appsetting.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables();
             Configuration = builder.Build();
         }

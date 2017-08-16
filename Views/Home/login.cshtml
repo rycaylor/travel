@@ -8,7 +8,7 @@
 <body>
     <h1>Login</h1>
 
-    @model wall.Models.User
+    @model travel.Models.User
     <form asp-controller="Home" asp-action="Log" method="post">
         <table>
              <tr>
@@ -16,8 +16,13 @@
                     <label for="">User Name</label>
                     <input asp-for="UserName"/>
                 </td>
-                <td>
-                    <span asp-validation-for="UserName"></span>
+
+                 <td>
+                    @{
+                        if(ViewBag.error != null){
+                            <span> @ViewBag.error </span>
+                        }
+                    }
                  </td>
             </tr>
             <tr>
@@ -25,13 +30,11 @@
                     <label for="">Password</label>
                     <input asp-for="Password"/>
                 </td>
-                <td>
-                    <span asp-validation-for="Password"></span>
-                 </td>
             </tr>
         </table>
     <button type="submit">Login</button>
     </form>
+
 
 </body>
 </html>

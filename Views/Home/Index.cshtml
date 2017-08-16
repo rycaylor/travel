@@ -9,7 +9,7 @@
 
 <h1>Please Register an Account</h1>
 
-@model wall.Models.User
+@model travel.Models.User
     <form asp-controller="Home" asp-action="Validate" method="post">
         <table>
             <tr>
@@ -30,15 +30,6 @@
                     <span asp-validation-for="LastName"></span>
                  </td>
             </tr>
-            <tr>
-                <td>
-                    <label for="">Email</label>
-                    <input asp-for="Email"/>
-                </td>
-                <td>
-                    <span asp-validation-for="Email"></span>
-                 </td>
-            </tr>
              <tr>
                 <td>
                     <label for="">User Name</label>
@@ -46,6 +37,13 @@
                 </td>
                 <td>
                     <span asp-validation-for="UserName"></span>
+                 </td>
+                 <td>
+                     @{
+                         if(ViewBag.error != null){
+                             <span> @ViewBag.error </span>
+                         }
+                     }
                  </td>
             </tr> 
             <tr>
