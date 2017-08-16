@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+@{
+    var user = ViewBag.user;
+}
 <body>
-    <h1>Hi!</h1>
+    <h1>Hi @user.UserName!</h1>
 </body>
 </html>

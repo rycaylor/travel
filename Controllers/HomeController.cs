@@ -11,7 +11,6 @@ namespace travel.Controllers
     public class HomeController : Controller
     {
         private readonly UserFactory userFactory;
-
         public HomeController(UserFactory connection)
         {
             userFactory = connection;
@@ -29,22 +28,23 @@ namespace travel.Controllers
         [Route("validate")]
         public IActionResult Validate(User newUser)
         {
-            TryValidateModel(newUser);
             if(ModelState.IsValid)
             {
                List<User> testing = userFactory.TestUser(newUser);
                if(testing.Count > 0)
                {
+                   ViewBag.error = "Username taken";
                    return View("Index");
                }
                else
                {
                    userFactory.CreateUser(newUser);
-                   return View("Index");
+                   return RedirectToAction("Index");
                }
             }
             else
             {
+                System.Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 return View("Index");
 
             }
@@ -65,26 +65,22 @@ namespace travel.Controllers
             if(ModelState.IsValid)
             {
                 
-                List<User> grab = userFactory.LoginUser(test);
-                if(grab.Count > 0)
+                User grab = userFactory.LoginUser(test);
+                if(grab != null)
                 {
-                    int logged;
-                    foreach(var user in grab)
-                    {
-                       logged  
-                    }
+                    HttpContext.Session.SetInt32("logged", grab.Id);
+                    return RedirectToAction("Home", "Dash");
                 }
                 else
                 {
+                    ViewBag.error = "Invalid username/password";
                     return View("login");
-                }
-
-                
+                }   
             }
             else
             {
-                return RedirectToAction("Login");
-
+                ViewBag.error = "Invalid username/password";
+                return View("Login");
             }
         }
 

@@ -15,10 +15,6 @@ namespace travel.Models
         [MinLength(3)]
         [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Name can only contain letters")]
         public string LastName { get; set; }
- 
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
 
         [Required (ErrorMessage = "User Name field is required.")]
         [MinLength(3)]
