@@ -10,6 +10,13 @@ namespace travel.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserFactory userFactory;
+
+        public HomeController(UserFactory connection)
+        {
+            userFactory = connection;
+        }
+
         // GET: /Home/
         [HttpGet]
         [Route("")]
@@ -25,14 +32,14 @@ namespace travel.Controllers
             TryValidateModel(newUser);
             if(ModelState.IsValid)
             {
-               List<User> testing = UserFactory.TestUser(newUser);
+               List<User> testing = userFactory.TestUser(newUser);
                if(testing.Count > 0)
                {
                    return View("Index");
                }
                else
                {
-                   UserFactory.CreateUser(newUser);
+                   userFactory.CreateUser(newUser);
                    return View("Index");
                }
             }
@@ -58,7 +65,7 @@ namespace travel.Controllers
             if(ModelState.IsValid)
             {
                 
-                List<User> grab = UserFactory.LoginUser(test);
+                List<User> grab = userFactory.LoginUser(test);
                 if(grab.Count > 0)
                 {
                     int logged;

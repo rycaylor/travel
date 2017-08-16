@@ -4,24 +4,25 @@ using MySql.Data.MySqlClient;
 using Dapper;
 using travel.Models;
 using System.Linq;
+using Microsoft.Extensions.Options;
  
 
 namespace travel.Factories
 {
     public class UserFactory
     {
-        static string server = "localhost";
-        static string db = "travel"; //Change to your schema name
-        static string port = "8889"; //Potentially 8889
-        static string user = "root";
-        static string pass = "root";
-        internal static IDbConnection Connection {
+        private readonly IOptions<MySqlOptions> MySqlConfig;
+ 
+        public UserFactory(IOptions<MySqlOptions> config)
+        {
+            MySqlConfig = config;
+        }
+        internal IDbConnection Connection {
             get {
-                return new MySqlConnection($"Server={server};Port={port};Database={db};UserID={user};Password={pass};SslMode=None");
+                return new MySqlConnection(MySqlConfig.Value.ConnectionString);
             }
         }
-    
-        public static void CreateUser(User newUser)
+        public void CreateUser(User newUser)
         {
         
             using(IDbConnection dbConnection = Connection)
@@ -32,7 +33,7 @@ namespace travel.Factories
             }
         
         }
-        public static List<User> TestUser(User testUser)
+        public List<User> TestUser(User testUser)
         {
             using(IDbConnection dbConnection = Connection)
             {
@@ -46,7 +47,7 @@ namespace travel.Factories
 
         }
 
-        public static List<User> LoginUser(UserTest test)
+        public List<User> LoginUser(UserTest test)
         {
             using(IDbConnection dbConnection = Connection)
             {
